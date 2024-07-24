@@ -4,6 +4,7 @@ version = "0.1.0"
 edition = "2021"
 authors = ["Heath Stewart (https://github.com/heaths)"]
 description = "Demonstration of tests and examples in Rust"
+publish = false
 
 [dev-dependencies]
 clap = { version = "3.2.23", features = ["cargo", "derive"] }

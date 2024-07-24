@@ -1,0 +1,44 @@
+name: ci
+on:
+  pull_request:
+  workflow_call:
+
+env:
+  CARGO_INCREMENTAL: 0
+  RUSTFLAGS: -Dwarnings
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    outputs:
+      docs: ${{ steps.upload-docs.outputs.artifact-id }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup
+        run: rustup show
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Test
+        run: cargo test --all-features --workspace
+      - name: Lint
+        run: cargo clippy --all-features --no-deps --workspace
+      - name: Build documentation
+        run: cargo doc --all-features --no-deps --workspace
+      - name: Generate index page
+        run: |
+          cat << EOF > target/doc/index.html
+          <html>
+            <head>
+              <meta http-equiv="refresh" content="0; url='samples/index.html'" />
+            </head>
+          </head>
+          EOF
+      - name: Upload documentation
+        id: upload-docs
+        uses: actions/upload-artifact@v4
+        with:
+          name: docs
+          path: target/doc/

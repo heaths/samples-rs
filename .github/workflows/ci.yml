@@ -1,0 +1,36 @@
+name: ci
+on:
+  push:
+  workflow_dispatch:
+
+env:
+  CARGO_INCREMENTAL: 0
+  RUSTFLAGS: -Dwarnings
+
+jobs:
+  test:
+    uses: ./.github/workflows/pr.yml
+  doc:
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: read
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+      url: ${{ steps.publish-docs.outputs.page_url }}
+    steps:
+      - name: Download documentation
+        uses: actions/download-artifact@v4
+        with:
+          name: ${{ needs.test.outputs.docs }}
+          path: docs/
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload GitHub pages
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/
+      - name: Publish GitHub pages
+        id: publish-docs
+        uses: actions/deploy-pages@v4
