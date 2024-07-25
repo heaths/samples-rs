@@ -3,6 +3,10 @@ on:
   push:
   workflow_dispatch:
 
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 env:
   CARGO_INCREMENTAL: 0
   RUSTFLAGS: -Dwarnings
@@ -21,16 +25,6 @@ jobs:
       name: github-pages
       url: ${{ steps.publish-docs.outputs.page_url }}
     steps:
-      - name: Download documentation
-        uses: actions/download-artifact@v4
-        with:
-          name: ${{ needs.test.outputs.docs }}
-          path: docs/
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload GitHub pages
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: docs/
-      - name: Publish GitHub pages
+      - name: Publish documentation
         id: publish-docs
         uses: actions/deploy-pages@v4

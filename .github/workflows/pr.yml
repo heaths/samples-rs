@@ -12,8 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-    outputs:
-      docs: ${{ steps.upload-docs.outputs.artifact-id }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -37,8 +35,6 @@ jobs:
           </head>
           EOF
       - name: Upload documentation
-        id: upload-docs
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-pages-artifact@v3
         with:
-          name: docs
           path: target/doc/
