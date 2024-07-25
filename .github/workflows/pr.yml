@@ -25,7 +25,7 @@ jobs:
         run: cargo clippy --all-features --no-deps --workspace
       - name: Build documentation
         run: cargo doc --all-features --no-deps --workspace
-      - name: Generate index page
+      - name: Copy assets
         run: |
           cat << EOF > target/doc/index.html
           <html>
@@ -34,6 +34,8 @@ jobs:
             </head>
           </head>
           EOF
+          mkdir -p target/doc/assets/
+          cp -r docs/assets/ target/doc/assets/
       - name: Upload documentation
         uses: actions/upload-pages-artifact@v3
         with:

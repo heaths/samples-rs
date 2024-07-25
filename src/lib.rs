@@ -1,7 +1,5 @@
 #![doc = include_str!("../README.md")]
-#![doc(
-    html_logo_url = "https://github.com/heaths/samples-rs/blob/main/docs/assets/samplesaurus_32.png"
-)]
+#![doc(html_logo_url = "https://heaths.github.io/samples-rs/assets/samplesaurus_32.png")]
 
 #[cfg(any(test, doctest))]
 mod docs;

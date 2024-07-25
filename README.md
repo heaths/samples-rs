@@ -2,7 +2,7 @@
 
 This repository contains samples of unit tests, integration tests, and examples.
 
-![Samplesaurus](docs/assets/samplesaurus_240.png)
+![Samplesaurus](https://heaths.github.io/samples-rs/assets/samplesaurus_240.png)
 
 ## Code sample
 
