@@ -34,8 +34,7 @@ jobs:
             </head>
           </head>
           EOF
-          mkdir -p target/doc/assets/
-          cp -r docs/assets/ target/doc/assets/
+          cp -r docs/assets/ target/doc/
       - name: Upload documentation
         uses: actions/upload-pages-artifact@v3
         with:
