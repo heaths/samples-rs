@@ -17,7 +17,7 @@ assert_eq!("hello, world!", &greeting);
 
 ## Documentation
 
-You can also test samples in [separate documentation](docs/index.md) in much the same way.
+You can also test samples in [separate documentation](https://github.com/heaths/samples-rs/blob/main/docs/index.md) in much the same way.
 By injecting a single markdown file per module, line numbers
 
 ## Testing
