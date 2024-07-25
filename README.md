@@ -1,6 +1,6 @@
 # Samples
 
-This repository contains samples of unit tests, integration tests, and examples.
+This [repository](https://github.com/heaths/samples-rs) contains samples of unit tests, integration tests, and examples.
 
 ![Samplesaurus](https://heaths.github.io/samples-rs/assets/samplesaurus_240.png)
 
