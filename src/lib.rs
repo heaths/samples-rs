@@ -21,7 +21,7 @@ pub use subjects::*;
 /// assert_eq!("hello, world!", &greeting);
 /// ```
 pub fn say_hello(who: impl fmt::Display) -> String {
-    format!("hello, {}!", who.to_string())
+    format!("hello, {}!", &who)
 }
 
 #[test]
