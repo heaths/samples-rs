@@ -3,12 +3,14 @@ use std::{
     fmt,
 };
 
+/// Displays the current username, if available.
 #[derive(Clone, Debug)]
 pub struct CurrentUser {
     username: String,
 }
 
 impl CurrentUser {
+    /// Create a new `CurrentUser` with the current username, or return an error if absent or empty.
     pub fn try_new() -> Result<Self, VarError> {
         let username = env::var("USER").or_else(|_| env::var("USERNAME"))?;
         if username.is_empty() {
