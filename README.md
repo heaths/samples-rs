@@ -18,7 +18,11 @@ assert_eq!("hello, world!", &greeting);
 ## Documentation
 
 You can also test samples in [separate documentation](https://github.com/heaths/samples-rs/blob/main/docs/index.md) in much the same way.
-By injecting a single markdown file per module, line numbers
+By injecting a single markdown file per module, line numbers will accurately reference lines of code in the injected markdown file.
+
+You can exclude these modules from release code by attributing them as `#[cfg(doctest)]`.
+
+Note currently that you cannot declare types in code to reference in documentation tests with this predicate. See [rust-lang/rust#67295](https://github.com/rust-lang/rust/issues/67295) for more information and status.
 
 ## Testing
 
