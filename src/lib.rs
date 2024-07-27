@@ -3,6 +3,12 @@
 
 #[cfg(doctest)]
 mod docs;
+mod subjects;
+#[cfg(test)]
+mod test;
+
+use std::fmt;
+pub use subjects::*;
 
 /// Say hello to whoever you specify.
 ///
@@ -14,8 +20,8 @@ mod docs;
 /// let greeting = say_hello("world");
 /// assert_eq!("hello, world!", &greeting);
 /// ```
-pub fn say_hello(who: impl AsRef<str>) -> String {
-    format!("hello, {}!", who.as_ref())
+pub fn say_hello(who: impl fmt::Display) -> String {
+    format!("hello, {}!", &who)
 }
 
 #[test]
@@ -43,17 +49,17 @@ mod tests {
     use super::*;
 
     #[derive(Debug)]
-    struct World {}
+    struct World;
 
-    impl AsRef<str> for World {
-        fn as_ref(&self) -> &str {
-            "world"
+    impl fmt::Display for World {
+        fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+            f.write_str("world")
         }
     }
 
     #[test]
     fn say_hello_world() {
-        let greeting = say_hello(World {});
+        let greeting = say_hello(World);
         assert_eq!("hello, world!", &greeting);
     }
 }

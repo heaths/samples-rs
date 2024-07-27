@@ -1,10 +1,13 @@
 use clap::Parser;
-use samples::say_hello;
+use samples::{say_hello, CurrentUser};
 
 fn main() {
     let args = Args::parse();
 
-    let greeting = say_hello(args.name);
+    let who = args.name.unwrap_or_else(|| {
+        CurrentUser::try_new().map_or_else(|_| "samplesaurus".to_string(), |user| user.to_string())
+    });
+    let greeting = say_hello(who);
     println!("{greeting}");
 }
 
@@ -12,6 +15,6 @@ fn main() {
 #[clap(version, about, long_about = None)]
 struct Args {
     /// Optional name to greet.
-    #[clap(default_value = "samplesaurus")]
-    name: String,
+    /// The default is the current username or "samplesaurus".
+    name: Option<String>,
 }

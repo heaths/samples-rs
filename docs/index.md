@@ -20,6 +20,6 @@ assert_eq!("hello, samplesaurus!", &greeting);
 ## compile_fail
 
 ```rust compile_fail
-let greeting = samples::say_hello(1);
+let greeting = samples::say_hello(());
 assert_eq!("hello, samplesaurus!", &greeting);
 ```
