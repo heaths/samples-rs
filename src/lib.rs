@@ -1,7 +1,7 @@
 #![doc = include_str!("../README.md")]
 #![doc(html_logo_url = "https://heaths.github.io/samples-rs/assets/samplesaurus_100.png")]
 
-#[cfg(any(test, doctest))]
+#[cfg(doctest)]
 mod docs;
 
 /// Say hello to whoever you specify.
